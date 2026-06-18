@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vélo O CMC – La liberté, c'est sur deux roues !</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-dark: #1a5c2e;
+  --green-mid: #1e6e35;
+  --green-light: #2d8a45;
+  --orange: #e07b00;
+  --orange-light: #f59520;
+  --yellow: #f5c842;
+  --white: #ffffff;
+  --text-light: #c8e0bc;
+  --text-muted: #7db87a;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: var(--green-dark);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1, h2, h3, h4, .nav-link, .btn {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* ─── NAV ─── */
+.nav {
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 56px;
+  border-bottom: 3px solid var(--orange);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 40px; height: 40px;
+  background: var(--green-dark);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.logo-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green-dark);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.logo-text span { color: var(--orange); }
+
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #1a1a1a;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding-bottom: 3px;
+  transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--orange);
+  border-bottom: 2px solid var(--orange);
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 480px;
+  background:
+    linear-gradient(rgba(5,25,10,0.60) 0%, rgba(5,25,10,0.25) 60%, rgba(5,25,10,0.55) 100%),
+    url('https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?w=1200&q=80') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 3rem 5rem;
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  max-width: 520px;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+.hero-sub {
+  font-size: 14px;
+  color: #ddefd8;
+  max-width: 380px;
+  line-height: 1.7;
+  margin-bottom: 1.8rem;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--orange);
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 10px 28px;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.btn:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+}
+.btn-outline:hover { background: var(--yellow); color: var(--green-dark); }
+
+/* ─── SEARCH BAR ─── */
+.search-row {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: rgba(10,40,15,0.7);
+  padding: 12px 18px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+.search-input, .search-select {
+  background: rgba(255,255,255,0.92);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.search-select { appearance: none; }
+
+/* ─── SECTION CHEVRON ─── */
+.chevron-orange {
+  height: 60px;
+  background: var(--orange);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  margin-top: 30px;
+}
+
+.chevron-green {
+  height: 60px;
+  background: var(--green-dark);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* ─── SECTION BASE ─── */
+.section {
+  padding: 4rem 3rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--yellow);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* ─── BIKES SECTION ─── */
+.bikes-section { background: var(--green-dark); }
+
+.bikes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 3rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bike-card { display: flex; flex-direction: column; }
+
+.diamond-wrap {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 0.9rem;
+}
+
+.bike-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.bike-desc {
+  font-size: 12.5px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ─── CIRCUITS SECTION ─── */
+.circuits-section { background: var(--green-mid); }
+
+.circuits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.circuit-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.circuit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.circuit-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  background: #2a7040;
+}
+
+.circuit-img-placeholder {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+
+.circuit-body { padding: 1rem 1.2rem 1.4rem; }
+
+.circuit-badge {
+  display: inline-block;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 0.6rem;
+}
+
+.badge-easy { background: #2ecc71; color: #0a3a1a; }
+.badge-medium { background: var(--orange); color: #3a1800; }
+.badge-hard { background: #c0392b; color: #fff; }
+
+.circuit-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+
+.circuit-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.circuit-meta span {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.circuit-desc {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.55;
+}
+
+/* ─── HISTOIRE SECTION ─── */
+.histoire-section {
+  background: var(--orange);
+  padding: 4rem 3rem;
+}
+
+.histoire-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.histoire-section .section-title {
+  color: var(--white);
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.histoire-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.8;
+  margin-bottom: 1.4rem;
+}
+
+.histoire-img-block {
+  position: relative;
+}
+
+.histoire-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.histoire-stat {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  background: var(--green-dark);
+  color: var(--yellow);
+  border-radius: 6px;
+  padding: 12px 18px;
+  text-align: center;
+}
+
+.histoire-stat-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+}
+
+.histoire-stat-label {
+  font-size: 11px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─── TEMOIGNAGES ─── */
+.temoignages-section { background: var(--green-dark); }
+
+.temoignages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.temoignage-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 1.4rem;
+}
+
+.stars { color: var(--yellow); font-size: 14px; margin-bottom: 0.7rem; letter-spacing: 2px; }
+
+.temoignage-text {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.temoignage-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--green-light);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.author-date {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ─── FAQ ─── */
+.faq-section { background: var(--green-mid); }
+
+.faq-list {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.faq-item {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: left;
+  padding: 1rem 1.3rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question:hover { color: var(--yellow); }
+
+.faq-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+  color: var(--orange);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.2s;
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.7;
+  padding: 0 1.3rem;
+}
+
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-item.open .faq-answer { max-height: 200px; padding: 0 1.3rem 1rem; }
+
+/* ─── BLOG ─── */
+.blog-section { background: var(--green-dark); }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto 2rem;
+}
+
+.blog-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.blog-card:hover { transform: translateY(-3px); }
+
+.blog-thumb {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+
+.blog-body { padding: 1rem 1.1rem 1.3rem; }
+
+.blog-tag {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--orange);
+  margin-bottom: 0.4rem;
+}
+
+.blog-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.blog-excerpt {
+  font-size: 12px;
+  color: var(--text-light);
+  line-height: 1.55;
+  margin-bottom: 0.7rem;
+}
+
+.blog-date {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.section-cta { text-align: center; margin-top: 0.5rem; }
+
+/* ─── CONTACT ─── */
+.contact-section {
+  background: var(--orange);
+  padding: 4rem 3rem;
+}
+
+.contact-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.contact-section .section-title {
+  color: var(--white);
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 1.2rem;
+}
+
+.contact-icon {
+  font-size: 1.4rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.contact-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 2px;
+}
+
+.contact-value {
+  font-size: 14px;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
+
+.form-input, .form-textarea {
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.55); }
+.form-input:focus, .form-textarea:focus { border-color: var(--yellow); }
+
+.form-textarea { resize: vertical; min-height: 100px; }
+
+.btn-white {
+  background: var(--white);
+  color: var(--orange);
+}
+.btn-white:hover { background: var(--yellow); color: var(--green-dark); }
+
+/* ─── FOOTER ─── */
+.footer {
+  background: #0f3a1c;
+  padding: 3rem 3rem 1.5rem;
+  border-top: 3px solid var(--orange);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+  max-width: 900px;
+  margin: 0 auto 2rem;
+}
+
+.footer-brand-text {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-top: 0.8rem;
+  max-width: 220px;
+}
+
+.footer-heading {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1rem;
+}
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--yellow); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ─── MAP PLACEHOLDER ─── */
+.map-placeholder {
+  width: 100%;
+  height: 300px;
+  background: #1a5c2e;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.map-inner {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="logo" href="#">
+    <div class="logo-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="5" cy="17" r="4" stroke="#7ecb5a" stroke-width="1.8" fill="none"/>
+        <circle cx="19" cy="17" r="4" stroke="#7ecb5a" stroke-width="1.8" fill="none"/>
+        <path d="M5 17 L10 8 L15 8 L19 17" stroke="#7ecb5a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M10 8 L12 17" stroke="#7ecb5a" stroke-width="1.4" fill="none"/>
+        <path d="M13 8 L15 4 L18 4" stroke="#7ecb5a" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+    <div class="logo-text">Vélo<br><span>O CMC</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+    <li><a href="#histoire" class="nav-link">Notre Histoire</a></li>
+    <li><a href="#circuits" class="nav-link">Nos Circuits</a></li>
+    <li><a href="#blog" class="nav-link">Blog</a></li>
+    <li><a href="#faq" class="nav-link">FAQ</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="accueil" class="hero">
+  <h1 class="hero-title">La liberté,<br>c'est sur deux roues !</h1>
+  <p class="hero-sub">Balades urbaines ou grandes randonnées, nous avons le vélo et l'itinéraire qu'il vous faut. Laissez-vous guider et vivez Ribeauvillé comme jamais.</p>
+  <a href="#circuits" class="btn">en savoir plus</a>
+
+  <div class="search-row">
+    <select class="search-select">
+      <option value="">Destination ∨</option>
+      <option>Ribeauvillé</option>
+      <option>Route des Vins</option>
+      <option>Forêt Noire</option>
+      <option>Colmar</option>
+    </select>
+    <input type="date" class="search-input" style="min-width:130px;" />
+    <select class="search-select">
+      <option value="">Niveau ∨</option>
+      <option>Débutant</option>
+      <option>Intermédiaire</option>
+      <option>Expert</option>
+    </select>
+    <button class="btn" style="padding:8px 20px;font-size:13px;">Explorer</button>
+  </div>
+</section>
+
+<!-- ORANGE CHEVRON -->
+<div class="chevron-orange"></div>
+
+<!-- VÉLOS SECTION -->
+<section class="section bikes-section">
+  <h2 class="section-title">À chacun son vélo !</h2>
+  <div class="bikes-grid">
+
+    <!-- VAE -->
+    <div class="bike-card reveal">
+      <div class="diamond-wrap">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="17" y="17" width="86" height="86" rx="4" fill="#f5c842" transform="rotate(45 60 60)"/>
+          <svg x="22" y="40" width="76" height="40" viewBox="0 0 76 40">
+            <circle cx="10" cy="30" r="9" stroke="#1a3a0a" stroke-width="2.5" fill="none"/>
+            <circle cx="66" cy="30" r="9" stroke="#1a3a0a" stroke-width="2.5" fill="none"/>
+            <path d="M10 30 L24 10 L42 10 L66 30" stroke="#1a3a0a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M24 10 L34 30" stroke="#1a3a0a" stroke-width="1.8" fill="none"/>
+            <path d="M40 10 L44 4 L50 4" stroke="#1a3a0a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 20 L12 20" stroke="#1a3a0a" stroke-width="2" stroke-linecap="round"/>
+            <rect x="62" y="4" width="10" height="4" rx="2" fill="#1a3a0a"/>
+            <circle cx="34" cy="22" r="5" stroke="#e07b00" stroke-width="2" fill="none"/>
+            <circle cx="34" cy="22" r="2" fill="#e07b00"/>
+          </svg>
+        </svg>
+      </div>
+      <div class="bike-name">Vélo à assistance électrique</div>
+      <p class="bike-desc">Pédaler plus facilement, ou plus loin, ou sans transpirer pour aller travailler. Le VAE réouvre l'usage du vélo à tous !</p>
+    </div>
+
+    <!-- BIPORTEUR -->
+    <div class="bike-card reveal">
+      <div class="diamond-wrap">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="17" y="17" width="86" height="86" rx="4" fill="#f5c842" transform="rotate(45 60 60)"/>
+          <svg x="16" y="40" width="88" height="40" viewBox="0 0 88 40">
+            <circle cx="10" cy="30" r="9" stroke="#1a3a0a" stroke-width="2.5" fill="none"/>
+            <circle cx="78" cy="30" r="9" stroke="#1a3a0a" stroke-width="2.5" fill="none"/>
+            <rect x="20" y="12" width="38" height="16" rx="3" fill="#2d8a45" stroke="#1a3a0a" stroke-width="1.8"/>
+            <path d="M10 30 L20 18" stroke="#1a3a0a" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M58 20 L78 30" stroke="#1a3a0a" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M58 12 L64 6 L72 6" stroke="#1a3a0a" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="30" y1="12" x2="30" y2="28" stroke="#1a3a0a" stroke-width="1" stroke-dasharray="2,2"/>
+            <line x1="45" y1="12" x2="45" y2="28" stroke="#1a3a0a" stroke-width="1" stroke-dasharray="2,2"/>
+          </svg>
+        </svg>
+      </div>
+      <div class="bike-name">Biporteur</div>
+      <p class="bike-desc">Vélo cargo prisé par les familles et les professionnels pour sa vélocité et sa maniabilité. Toujours un œil sur le chargement !</p>
+    </div>
+
+    <!-- URBAIN -->
+    <div class="bike-card reveal">
+      <div class="diamond-wrap">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="17" y="17" width="86" height="86" rx="4" fill="#f5c842" transform="rotate(45 60 60)"/>
+          <svg x="22" y="40" width="76" height="40" viewBox="0 0 76 40">
+            <circle cx="10" cy="30" r="9" stroke="#555" stroke-width="2.5" fill="none"/>
+            <circle cx="66" cy="30" r="9" stroke="#555" stroke-width="2.5" fill="none"/>
+            <path d="M10 30 L24 10 L40 10 L66 30" stroke="#555" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M24 10 L34 30" stroke="#555" stroke-width="1.8" fill="none"/>
+            <path d="M38 10 L42 4 L48 4" stroke="#555" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 20 L12 20" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+            <rect x="62" y="4" width="10" height="4" rx="2" fill="#555"/>
+            <path d="M22 10 L42 10" stroke="#555" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </svg>
+      </div>
+      <div class="bike-name">Urbain</div>
+      <p class="bike-desc">Élégant et maniable, conçu pour vos trajets journaliers en ville. Léger, pratique et stylé.</p>
+    </div>
+
+    <!-- PLIANT -->
+    <div class="bike-card reveal">
+      <div class="diamond-wrap">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="17" y="17" width="86" height="86" rx="4" fill="#f5c842" transform="rotate(45 60 60)"/>
+          <svg x="22" y="40" width="76" height="40" viewBox="0 0 76 40">
+            <circle cx="10" cy="30" r="9" stroke="#1a3a0a" stroke-width="2.5" fill="none"/>
+            <circle cx="66" cy="30" r="9" stroke="#1a3a0a" stroke-width="2.5" fill="none"/>
+            <path d="M10 30 L24 12 L38 18 L52 10 L66 30" stroke="#1a3a0a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="38" cy="18" r="3" fill="#e07b00"/>
+            <path d="M36 10 L40 4 L46 4" stroke="#1a3a0a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 20 L12 20" stroke="#1a3a0a" stroke-width="2" stroke-linecap="round"/>
+            <rect x="62" y="4" width="10" height="4" rx="2" fill="#1a3a0a"/>
+          </svg>
+        </svg>
+      </div>
+      <div class="bike-name">Vélo pliant</div>
+      <p class="bike-desc">Compact et pliable, pour faciliter le transport ou le stockage. Idéal pour les citadins mobiles.</p>
+    </div>
+
+    <!-- VTC -->
+    <div class="bike-card reveal">
+      <div class="diamond-wrap">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="17" y="17" width="86" height="86" rx="4" fill="#f5c842" transform="rotate(45 60 60)"/>
+          <svg x="20" y="40" width="80" height="40" viewBox="0 0 80 40">
+            <circle cx="10" cy="30" r="9" stroke="#1a5c7a" stroke-width="2.5" fill="none"/>
+            <circle cx="70" cy="30" r="9" stroke="#1a5c7a" stroke-width="2.5" fill="none"/>
+            <path d="M10 30 L26 10 L44 10 L70 30" stroke="#1a5c7a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M26 10 L36 30" stroke="#1a5c7a" stroke-width="1.8" fill="none"/>
+            <path d="M42 10 L46 4 L52 4" stroke="#1a5c7a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M8 20 L12 20" stroke="#1a5c7a" stroke-width="2" stroke-linecap="round"/>
+            <rect x="66" y="4" width="10" height="4" rx="2" fill="#1a5c7a"/>
+            <path d="M24 10 L46 10" stroke="#1a5c7a" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </svg>
+      </div>
+      <div class="bike-name">VTC</div>
+      <p class="bike-desc">Vélo polyvalent capable d'aller sur la route comme sur les chemins. Le compagnon idéal pour toutes les aventures.</p>
+    </div>
+
+    <!-- BMX -->
+    <div class="bike-card reveal">
+      <div class="diamond-wrap">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect x="17" y="17" width="86" height="86" rx="4" fill="#f5c842" transform="rotate(45 60 60)"/>
+          <svg x="18" y="38" width="84" height="44" viewBox="0 0 84 44">
+            <circle cx="10" cy="32" r="10" stroke="#7a2a0a" stroke-width="3" fill="none"/>
+            <circle cx="74" cy="32" r="10" stroke="#7a2a0a" stroke-width="3" fill="none"/>
+            <path d="M10 32 L28 10 L56 10 L74 32" stroke="#7a2a0a" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M28 10 L42 32" stroke="#7a2a0a" stroke-width="2.2" fill="none"/>
+            <path d="M28 10 L56 10" stroke="#7a2a0a" stroke-width="3" stroke-linecap="round"/>
+            <path d="M54 10 L58 4 L64 4" stroke="#7a2a0a" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M8 20 L12 20" stroke="#7a2a0a" stroke-width="2.2" stroke-linecap="round"/>
+            <rect x="70" y="4" width="10" height="4" rx="2" fill="#7a2a0a"/>
+          </svg>
+        </svg>
+      </div>
+      <div class="bike-name">BMX</div>
+      <p class="bike-desc">Dirt, race, park, rampe, street ou le flat. Que tu sois débutant ou confirmé, on saura te trouver le bon vélo !</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CIRCUITS SECTION -->
+<div class="chevron-orange"></div>
+<section id="circuits" class="section circuits-section">
+  <h2 class="section-title">Nos circuits</h2>
+  <div class="circuits-grid">
+
+    <div class="circuit-card reveal">
+      <div class="circuit-img-placeholder" style="background:#1a5c2e;">🌿</div>
+      <div class="circuit-body">
+        <span class="circuit-badge badge-easy">Facile</span>
+        <div class="circuit-name">La Route des Vins</div>
+        <div class="circuit-meta">
+          <span>🚴 32 km</span>
+          <span>⏱ 2h30</span>
+          <span>⬆ 180 m</span>
+        </div>
+        <p class="circuit-desc">Un panorama exceptionnel entre vignes et villages alsaciens. Idéal pour les familles et les débutants.</p>
+      </div>
+    </div>
+
+    <div class="circuit-card reveal">
+      <div class="circuit-img-placeholder" style="background:#2d4a1a;">🌲</div>
+      <div class="circuit-body">
+        <span class="circuit-badge badge-medium">Intermédiaire</span>
+        <div class="circuit-name">Les Crêtes Vosgiennes</div>
+        <div class="circuit-meta">
+          <span>🚴 58 km</span>
+          <span>⏱ 4h</span>
+          <span>⬆ 820 m</span>
+        </div>
+        <p class="circuit-desc">Traversée des Vosges en altitude, forêts de sapins et vues imprenables sur la plaine d'Alsace.</p>
+      </div>
+    </div>
+
+    <div class="circuit-card reveal">
+      <div class="circuit-img-placeholder" style="background:#3a1a0a;">🏔</div>
+      <div class="circuit-body">
+        <span class="circuit-badge badge-hard">Expert</span>
+        <div class="circuit-name">Le Défi du Haut-Koenigsbourg</div>
+        <div class="circuit-meta">
+          <span>🚴 75 km</span>
+          <span>⏱ 6h</span>
+          <span>⬆ 1 450 m</span>
+        </div>
+        <p class="circuit-desc">Un défi pour les cyclistes confirmés. Montée vers le château, single tracks techniques et descentes grisantes.</p>
+      </div>
+    </div>
+
+    <div class="circuit-card reveal">
+      <div class="circuit-img-placeholder" style="background:#1a3a1a;">🌸</div>
+      <div class="circuit-body">
+        <span class="circuit-badge badge-easy">Facile</span>
+        <div class="circuit-name">Ribeauvillé en Famille</div>
+        <div class="circuit-meta">
+          <span>🚴 18 km</span>
+          <span>⏱ 1h30</span>
+          <span>⬆ 80 m</span>
+        </div>
+        <p class="circuit-desc">Découvrez les ruelles médiévales et les jardins fleuris de Ribeauvillé. Le circuit parfait pour les enfants.</p>
+      </div>
+    </div>
+
+    <div class="circuit-card reveal">
+      <div class="circuit-img-placeholder" style="background:#0a2a3a;">🏞</div>
+      <div class="circuit-body">
+        <span class="circuit-badge badge-medium">Intermédiaire</span>
+        <div class="circuit-name">Tour des Châteaux</div>
+        <div class="circuit-meta">
+          <span>🚴 45 km</span>
+          <span>⏱ 3h</span>
+          <span>⬆ 560 m</span>
+        </div>
+        <p class="circuit-desc">Un circuit culturel et sportif reliant les trois châteaux de Ribeauvillé à travers bois et vignobles.</p>
+      </div>
+    </div>
+
+    <div class="circuit-card reveal">
+      <div class="circuit-img-placeholder" style="background:#1a2a0a;">🌄</div>
+      <div class="circuit-body">
+        <span class="circuit-badge badge-hard">Expert</span>
+        <div class="circuit-name">Enduro Vosges Sud</div>
+        <div class="circuit-meta">
+          <span>🚴 90 km</span>
+          <span>⏱ 7h</span>
+          <span>⬆ 2 100 m</span>
+        </div>
+        <p class="circuit-desc">L'ultime challenge pour les passionnés d'enduro. Sentiers techniques, portions rocailleuses et panoramas époustouflants.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-cta">
+    <a href="#contact" class="btn">Réserver un circuit</a>
+  </div>
+</section>
+
+<!-- HISTOIRE SECTION -->
+<div style="height:60px;background:#1e6e35;clip-path:polygon(0 0,100% 0,50% 100%);"></div>
+<section id="histoire" class="histoire-section">
+  <div class="histoire-inner">
+    <div class="reveal">
+      <h2 class="section-title" style="font-size:2rem;color:#fff;text-align:left;margin-bottom:1.2rem;">Notre histoire</h2>
+      <p class="histoire-text">Nés d'une passion commune pour le vélo et les grands espaces alsaciens, nous avons fondé Vélo O CMC en 2012. Notre mission : rendre accessible à tous la beauté de nos paysages, à travers des circuits soigneusement tracés et des vélos adaptés à chaque profil.</p>
+      <p class="histoire-text">Aujourd'hui, notre équipe de passionnés accompagne chaque année plus de 3 000 cyclistes sur les routes et sentiers de la région. Débutants ou confirmés, familles ou sportifs, nous avons le circuit et le vélo qu'il vous faut.</p>
+      <a href="#contact" class="btn btn-white" style="color:var(--orange);">Nous contacter</a>
+    </div>
+    <div class="histoire-img-block reveal">
+      <div class="histoire-img-placeholder" style="background:rgba(0,0,0,0.15);font-size:5rem;">🚵</div>
+      <div class="histoire-stat">
+        <span class="histoire-stat-num">3 000+</span>
+        <span class="histoire-stat-label">cyclistes / an</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMOIGNAGES -->
+<div style="height:60px;background:#e07b00;clip-path:polygon(50% 0,100% 100%,0 100%);"></div>
+<section class="section temoignages-section">
+  <h2 class="section-title">Ils nous font confiance</h2>
+  <div class="temoignages-grid">
+
+    <div class="temoignage-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="temoignage-text">« Une expérience inoubliable ! Le circuit des Crêtes Vosgiennes est magnifique, et l'équipe est aux petits soins. On reviendra sans hésiter. »</p>
+      <div class="temoignage-author">
+        <div class="author-avatar">MR</div>
+        <div>
+          <div class="author-name">Marie R.</div>
+          <div class="author-date">Juin 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="temoignage-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="temoignage-text">« Le VAE a rendu possible une randonnée que je n'aurais jamais pu faire autrement. Paysages incroyables, vélos en parfait état. Merci ! »</p>
+      <div class="temoignage-author">
+        <div class="author-avatar">PD</div>
+        <div>
+          <div class="author-name">Philippe D.</div>
+          <div class="author-date">Août 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="temoignage-card reveal">
+      <div class="stars">★★★★☆</div>
+      <p class="temoignage-text">« Super balade en famille sur la Route des Vins. Les enfants ont adoré ! Le biporteur est parfait pour transporter les petits. »</p>
+      <div class="temoignage-author">
+        <div class="author-avatar">SL</div>
+        <div>
+          <div class="author-name">Sophie L.</div>
+          <div class="author-date">Juillet 2024</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<div class="chevron-orange"></div>
+<section id="faq" class="section faq-section">
+  <h2 class="section-title">Questions fréquentes</h2>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Faut-il savoir faire du vélo pour venir ?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">Oui, il est nécessaire de maîtriser les bases du cyclisme. Cependant, notre équipe propose des initiations pour les débutants absolus. Contactez-nous pour en savoir plus.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Les vélos sont-ils disponibles à la location ?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">Absolument ! Tous nos vélos sont disponibles à la location à la journée ou à la demi-journée. VAE, VTC, biporteur, BMX… Nous avons le modèle adapté à votre projet.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Les circuits sont-ils adaptés aux enfants ?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">Plusieurs de nos circuits sont conçus spécialement pour les familles avec enfants, comme "Ribeauvillé en Famille" (18 km, facile). Des sièges enfant et des remorques sont disponibles à la location.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Comment réserver un circuit ou un vélo ?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">Vous pouvez réserver directement en ligne via notre formulaire de contact, ou nous appeler. Nous recommandons de réserver 48h à l'avance en haute saison (juin–septembre).</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Que se passe-t-il en cas de mauvais temps ?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">En cas de conditions météorologiques dangereuses, nous proposons un report sans frais ou un remboursement intégral. Nous vous conseillons de consulter la météo la veille de votre sortie.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Y a-t-il des casques et équipements fournis ?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-answer">Oui, le casque est inclus dans chaque location. Des gants, gilets réfléchissants et sacoches sont disponibles à la demande. La sécurité est notre priorité.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BLOG -->
+<div style="height:60px;background:#1e6e35;clip-path:polygon(50% 0,100% 100%,0 100%);"></div>
+<section id="blog" class="section blog-section">
+  <h2 class="section-title">Le blog</h2>
+  <div class="blog-grid">
+
+    <div class="blog-card reveal">
+      <div class="blog-thumb" style="background:#1a5c2e;">🌿</div>
+      <div class="blog-body">
+        <div class="blog-tag">Circuits</div>
+        <div class="blog-title">5 raisons de faire la Route des Vins en vélo</div>
+        <p class="blog-excerpt">Découvrez pourquoi ce circuit est notre préféré des touristes comme des locaux…</p>
+        <div class="blog-date">12 septembre 2024</div>
+      </div>
+    </div>
+
+    <div class="blog-card reveal">
+      <div class="blog-thumb" style="background:#2d4a1a;">⚡</div>
+      <div class="blog-body">
+        <div class="blog-tag">Matériel</div>
+        <div class="blog-title">Tout savoir sur le vélo à assistance électrique</div>
+        <p class="blog-excerpt">Le VAE n'est plus réservé aux seniors. Voici pourquoi il change la donne pour tous les cyclistes…</p>
+        <div class="blog-date">3 août 2024</div>
+      </div>
+    </div>
+
+    <div class="blog-card reveal">
+      <div class="blog-thumb" style="background:#3a2a0a;">🍂</div>
+      <div class="blog-body">
+        <div class="blog-tag">Saisons</div>
+        <div class="blog-title">Rouler en automne en Alsace : nos conseils</div>
+        <p class="blog-excerpt">L'automne offre des paysages incroyables. Voici comment préparer votre sortie pour en profiter au maximum…</p>
+        <div class="blog-date">18 octobre 2024</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="section-cta">
+    <a href="#" class="btn btn-outline">Voir tous les articles</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="chevron-orange"></div>
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="section-title" style="text-align:left;color:#fff;font-size:2rem;margin-bottom:1.2rem;">Contactez-nous</h2>
+      <div class="contact-info-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-label">Adresse</div>
+          <div class="contact-value">12 rue des Cigognes, 68150 Ribeauvillé</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-icon">📞</span>
+        <div>
+          <div class="contact-label">Téléphone</div>
+          <div class="contact-value">+33 (0)3 89 73 22 10</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">contact@velo-ocmc.fr</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-icon">🕐</span>
+        <div>
+          <div class="contact-label">Horaires</div>
+          <div class="contact-value">Lun–Sam : 9h–18h<br>Dimanche : 10h–16h</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="contact-form">
+        <input type="text" class="form-input" placeholder="Votre nom" />
+        <input type="email" class="form-input" placeholder="Votre email" />
+        <select class="form-input" style="cursor:pointer;">
+          <option value="">Sujet de votre demande</option>
+          <option>Location de vélo</option>
+          <option>Réservation circuit</option>
+          <option>Question générale</option>
+          <option>Partenariat</option>
+        </select>
+        <textarea class="form-textarea" placeholder="Votre message…"></textarea>
+        <button class="btn btn-white">Envoyer le message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="logo" href="#" style="margin-bottom:0.8rem;display:inline-flex;">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="5" cy="17" r="4" stroke="#7ecb5a" stroke-width="1.8" fill="none"/>
+            <circle cx="19" cy="17" r="4" stroke="#7ecb5a" stroke-width="1.8" fill="none"/>
+            <path d="M5 17 L10 8 L15 8 L19 17" stroke="#7ecb5a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M10 8 L12 17" stroke="#7ecb5a" stroke-width="1.4" fill="none"/>
+            <path d="M13 8 L15 4 L18 4" stroke="#7ecb5a" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="logo-text" style="margin-left:10px;">Vélo<br><span>O CMC</span></div>
+      </a>
+      <p class="footer-brand-text">La liberté, c'est sur deux roues. Location de vélos et circuits guidés à Ribeauvillé, au cœur de l'Alsace.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#histoire">Notre histoire</a></li>
+        <li><a href="#circuits">Nos circuits</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Vélos</div>
+      <ul class="footer-links">
+        <li><a href="#">VAE</a></li>
+        <li><a href="#">Biporteur</a></li>
+        <li><a href="#">Urbain</a></li>
+        <li><a href="#">Pliant</a></li>
+        <li><a href="#">VTC</a></li>
+        <li><a href="#">BMX</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Suivez-nous</div>
+      <ul class="footer-links">
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Strava</a></li>
+        <li><a href="#">TripAdvisor</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Vélo O CMC — Ribeauvillé, Alsace</span>
+    <span>Mentions légales · Politique de confidentialité</span>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
